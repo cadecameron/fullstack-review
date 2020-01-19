@@ -37,6 +37,11 @@ let Repo = mongoose.model('Repo', repoSchema);
 let save = (data, callback) => {
   let returnedUsers = []; // create empty array to store data returned by database
 
+  if(!Array.isArray(data)) {
+    callback(new Error('Not an array in save function!'));
+    return;
+  }
+
   data.forEach((repo) => {
     // map required data to schema object
     // let newUser = Repo({ // changed newUser to object, so we can insert using findOneAndUpdate()

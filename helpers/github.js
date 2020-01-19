@@ -17,11 +17,14 @@ let getReposByUsername = (username, callback) => {
   };
 
   request(options, (err, res, body) => {
+    console.log(`Recieved a statusCode from GitHub of ${res.statusCode}`);
     if (err) {
       callback(err);
     } else if (res.statusCode == 200) {
       var data = JSON.parse(body);
       callback(null, data);
+    } else if (res.statusCode >= 400 && res.statusCode <= 499) {
+      callback(new Error('GitHub user not found!'));
     } else {
       callback(null, 'Something went wrong with Github');
     }

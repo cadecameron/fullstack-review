@@ -49,11 +49,10 @@ app.post('/repos', function (req, res) {
 
   getReposByUsername(req.body, (err, data) => {
     if (err) {
-      console.log('Error getting response from remote API server:', err);
-      res.status(403).end();
+      console.log(err.message, err);
+      res.status(403).send(err);
       return;
     }
-
     console.log('Recieved data from getReposByUsername function of length:', data.length, '. Sending off to database');
 
     db.save(data, (err, data) => {

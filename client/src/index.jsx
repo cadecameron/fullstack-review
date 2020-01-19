@@ -41,6 +41,9 @@ class App extends React.Component {
         console.log(`Received response for POST request to server with status ${res.status}.`);
         // call get method with .then() to re-populate table?
       })
+      .then(() => {
+        this.get();
+      })
       .catch((err) => {
         console.log('Caught error attempting to post username to server:', err);
       })
