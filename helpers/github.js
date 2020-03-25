@@ -3,7 +3,7 @@ const config = require('../config.js');
 const API_URL = 'https://api.github.com/users/' // {username}
 
 let getReposByUsername = (username, callback) => {
-  // TODO - Use the request module to request repos for a specific
+  // Use the request module to request repos for a specific
   // user from the github API
 
   // The options object has been provided to help you out,
@@ -28,9 +28,7 @@ let getReposByUsername = (username, callback) => {
     } else {
       callback(null, 'Something went wrong with Github');
     }
-
-  })
-
-}
+  });
+};
 
 module.exports.getReposByUsername = getReposByUsername;

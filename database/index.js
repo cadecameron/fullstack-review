@@ -32,8 +32,8 @@ let repoSchema = mongoose.Schema({
 // create new Repo model
 let Repo = mongoose.model('Repo', repoSchema);
 
-// save takes in raw JSON response data, and transpiles it into the required schema structure before
-// saving to the Mongo database
+// save takes in raw JSON response data, and transpiles it into the
+// required schema structure before saving to the Mongo database
 let save = (data, callback) => {
   let returnedUsers = []; // create empty array to store data returned by database
 
@@ -44,7 +44,6 @@ let save = (data, callback) => {
 
   data.forEach((repo) => {
     // map required data to schema object
-    // let newUser = Repo({ // changed newUser to object, so we can insert using findOneAndUpdate()
     let newUser = {
       id: repo.id,
       name: repo.name,
@@ -66,18 +65,6 @@ let save = (data, callback) => {
       watchers: repo.watchers,
     };
 
-    // originally used 'save' method.
-    // it didn't work because it duplicates records
-
-    // save schema object to the database
-    // newUser.save((err, newUser) => {
-    //   if (err) {
-    //     console.log('Error attempting to save to database:', err);
-    //     return callback(err);
-    //   }
-    //   console.log(`New repo record with id ${newUser.id} created in database!`);
-    // });
-
     // create findOneAndUpdate options/queries
     const filter = { id: repo.id }; // query to search with
     const update = newUser; // object to insert if filter criteria isn't found
@@ -85,6 +72,7 @@ let save = (data, callback) => {
       new: true, // this forces Mongo to return the updated data, not the pre-update data
       upsert: true // Make this update into an upsert
     }
+
     // save/update database with schema object
     Repo.findOneAndUpdate(filter, update, options, (err, returnedUserData) => {
       if (err) {

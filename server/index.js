@@ -16,9 +16,8 @@ let port = 1128;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 app.use(morgan('dev'));
-app.use(bodyparser.text()); // testing w Postman using plain text
+app.use(bodyparser.text()); // for testing w Postman using plain text
 app.use(express.json());
-//app.use(bodyparser.json()); // parses any reqs with application/json type
 
 // Handle requests with invalid JSON req.body
 app.use((err, req, res, next) => {
@@ -68,15 +67,6 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos, based on the passed in criteria/filters
-  //console.log(JSON.stringify(req.body));
-  // criteria input validation (i.e. JSON is valid, etc)
-  // if (!req.body || typeof req.body !== 'object' || typeof req.body != 'string') {
-  //   console.log(`Criteria passed to /repos was a ${typeof req.body} with a value of ${req.body}.\n
-  //   Fetching all repos with default criteria instead. \n
-  //   If this isn't what you were expecting, make a GET request to the /repos endpoint with either a valid JSON object or a username as plain text in the body of your request.`);
-  //   req.body = {};
-  // }
-
   console.log(`Passing ${typeof req.body} ${JSON.stringify(req.body)} to getFiltered database function.`);
   // send criteria to getFiltered database lookup function
   db.getFiltered(req.body, (err, data) => {
@@ -88,8 +78,6 @@ app.get('/repos', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).send(JSON.stringify(data));
   });
-
-
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////
