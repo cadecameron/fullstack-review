@@ -1,5 +1,5 @@
 # fullstack-review
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+This is a project I completed as a student at [hackreactor](http://hackreactor.com).
 
 ## High Level Goals of this Sprint
 - Write and integrate a React/JSX client with an Express/MongoDB server
